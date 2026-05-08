@@ -48,6 +48,16 @@ public class UserInterface {
                 case 4:
                     processGetByColorRequest();
                     break;
+                case 5:
+                    processGetByMileageRequest();
+                    break;
+                case 6:
+                    processGetByTypeRequest();
+                    break;
+                case 7:
+                    getAllVehicles();
+                    break;
+
 
 
             }
@@ -131,5 +141,34 @@ public class UserInterface {
         String colorVehicle = theScanner.nextLine();
         System.out.println();
         displayVehicles(dealership.getVehiclesByColor(colorVehicle));
+    }
+
+    private void processGetByMileageRequest(){
+        System.out.println("=== Search by Mileage ===");
+        System.out.println();
+        System.out.println("What is the Minimum Mileage? ");
+        int minMileage = theScanner.nextInt();
+        System.out.println("What is the Maximum Mileage? ");
+        int maxMileage = theScanner.nextInt();
+        System.out.println();
+        //Display the output with the filter
+        displayVehicles(dealership.getVehiclesByMileage(minMileage, maxMileage));
+    }
+
+    private void processGetByTypeRequest(){
+        //Eat the line
+        theScanner.nextLine();
+        System.out.println("=== Search By Type (SUV, Truck, Sedan) ===");
+        System.out.println();
+        System.out.println("What type of Vehicle is it? (SUV, Truck, Sedan)");
+        String typeVehicle = theScanner.nextLine();
+        System.out.println();
+        displayVehicles(dealership.getVehicleByType(typeVehicle));
+
+    }
+
+    private void getAllVehicles(){
+        System.out.println("=== All Vehicles ===");
+        displayVehicles(dealership.getAllVehicle());
     }
 }

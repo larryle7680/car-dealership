@@ -79,6 +79,31 @@ public class Dealership {
         return colorVehiclesResults;
     }
 
+    public ArrayList<Vehicle>getVehiclesByMileage(int minMileage, int maxMileage){
+        //Create and instance for mileage
+        ArrayList<Vehicle> mileageVehicleResults = new ArrayList<>();
+
+        //loop through the array
+        for(Vehicle vehicle : inventory){
+            if(vehicle.getOdometer() >= minMileage && vehicle.getOdometer() <= maxMileage){
+                mileageVehicleResults.add(vehicle);
+            }
+        }
+        return mileageVehicleResults;
+    }
+
+    public ArrayList<Vehicle>getVehicleByType(String vehicleType){
+        //Create an instance for type
+        ArrayList<Vehicle> vehicleTypeResults = new ArrayList<>();
+
+        for(Vehicle vehicle : inventory){
+            if(vehicle.getVehicleType().equalsIgnoreCase(vehicleType)){
+                vehicleTypeResults.add(vehicle);
+            }
+        }
+        return vehicleTypeResults;
+    }
+
     //return the entire list
     public ArrayList<Vehicle> getAllVehicle(){
         return this.inventory;

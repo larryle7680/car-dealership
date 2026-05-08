@@ -26,6 +26,14 @@ public class Vehicle {
         this.price = price;
     }
 
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public int getOdometer() {
+        return odometer;
+    }
+
     public String getColor() {
         return color;
     }
