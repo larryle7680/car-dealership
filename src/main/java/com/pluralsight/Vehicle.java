@@ -26,6 +26,10 @@ public class Vehicle {
         this.price = price;
     }
 
+    public String getColor() {
+        return color;
+    }
+
     public String getMake() {
         return make;
     }

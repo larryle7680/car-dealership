@@ -31,7 +31,7 @@ public class UserInterface {
             System.out.println("9. Remove Vehicle");
             System.out.println("99. Quit");
             System.out.println();
-            System.out.println("Please Choose an option");
+            System.out.println("Please Choose an option: ");
             //Store the users input into a variable
             int usersInput = theScanner.nextInt();
 
@@ -40,10 +40,13 @@ public class UserInterface {
                     processGetByPriceRequest();
                     break;
                 case 2:
-                    processGetByMakeModel();
+                    processGetByMakeModelRequest();
                     break;
                 case 3:
                     processGetByYearRequest();
+                    break;
+                case 4:
+                    processGetByColorRequest();
                     break;
 
 
@@ -105,7 +108,7 @@ public class UserInterface {
         displayVehicles(dealership.getVehiclesByYear(startYear, endYear));
     }
 
-    private void processGetByMakeModel(){
+    private void processGetByMakeModelRequest(){
         //Eat a line?
         theScanner.nextLine();
         //Prompt user for a make/model and store it
@@ -117,5 +120,16 @@ public class UserInterface {
         String modelVehicle = theScanner.nextLine();
         System.out.println();
         displayVehicles(dealership.getVehiclesByMakeModel(makeVehicle, modelVehicle));
+    }
+
+    private void processGetByColorRequest(){
+        //Eat a line?
+        theScanner.nextLine();
+        System.out.println("=== Search By Color ===");
+        System.out.println();
+        System.out.println("What is the Color of the Vehicle? ");
+        String colorVehicle = theScanner.nextLine();
+        System.out.println();
+        displayVehicles(dealership.getVehiclesByColor(colorVehicle));
     }
 }

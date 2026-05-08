@@ -55,7 +55,7 @@ public class Dealership {
     }
 
     public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model){
-        //Create and instance for makeModel
+        //Create an instance for makeModel
         ArrayList<Vehicle> makeModelResults = new ArrayList<>();
         //loop through the vehicles in inventory
         for(Vehicle vehicle : inventory){
@@ -66,7 +66,18 @@ public class Dealership {
         return makeModelResults;
     }
 
-
+    //this method returns a ArrayList of Vehicles
+    public ArrayList<Vehicle> getVehiclesByColor(String color){
+        //Create an instance for color
+        ArrayList<Vehicle> colorVehiclesResults = new ArrayList<>();
+        //loop through the vehicles in the inventory
+        for(Vehicle vehicle : inventory){
+            if(vehicle.getColor().equalsIgnoreCase(color)){
+                colorVehiclesResults.add(vehicle);
+            }
+        }
+        return colorVehiclesResults;
+    }
 
     //return the entire list
     public ArrayList<Vehicle> getAllVehicle(){
