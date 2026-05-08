@@ -25,4 +25,27 @@ public class Vehicle {
         this.odometer = odometer;
         this.price = price;
     }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    // Converts all fields into a single line of text
+    @Override
+    public String toString() {
+        return vin + " | " + year + " | " + make + " | " + model + " | " +
+                vehicleType + " | " + color + " | " + odometer + " | $" + price;
+    }
 }

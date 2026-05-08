@@ -21,9 +21,52 @@ public class Dealership {
 
 
     //filter inventory list by price and return
-    public ArrayList<Vehicle> getVehiclePrice(){
-        return null;
+    public ArrayList<Vehicle> getVehiclesByPrice(double minPrice, double maxPrice){
+        //ArrayList variable name is results to hold the vehicles that matches the conditions in inventory
+        ArrayList<Vehicle> results = new ArrayList<>();
+
+        //This is looping through the inventory to find a match through the inventory
+        for(Vehicle vehicle : inventory){
+            //If vehicle price is greater or equal to the minPrice
+            //And if vehicle price is less than or equal to the maxPrice
+            //then it'll store it into results using hte .add method
+            if(vehicle.getPrice() >= minPrice && vehicle.getPrice() <= maxPrice){
+                results.add(vehicle);
+
+            }
+        }
+
+        //gives back the filtered list.
+        return results;
     }
+
+    //returns a array list of vehicle with the input of startYear and endYear
+    public ArrayList<Vehicle> getVehiclesByYear(int startYear, int endYear){
+        //Creating an instance for year results
+        ArrayList<Vehicle> yearResults = new ArrayList<>();
+        //loop through the vehicles in inventory
+        for(Vehicle vehicle : inventory){
+            if(vehicle.getYear() >= startYear && vehicle.getYear() <= endYear){
+                //Add all the filtered vehicles into yearResults
+                yearResults.add(vehicle);
+            }
+        }
+        return yearResults;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model){
+        //Create and instance for makeModel
+        ArrayList<Vehicle> makeModelResults = new ArrayList<>();
+        //loop through the vehicles in inventory
+        for(Vehicle vehicle : inventory){
+            if(vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model)){
+                makeModelResults.add(vehicle);
+            }
+        }
+        return makeModelResults;
+    }
+
+
 
     //return the entire list
     public ArrayList<Vehicle> getAllVehicle(){
