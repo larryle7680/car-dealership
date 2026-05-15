@@ -9,6 +9,7 @@ public class UserInterface {
     static Scanner theScanner = new Scanner(System.in);
     //Object reference
     private Dealership dealership;
+    private DealershipFileManager fileManager = new DealershipFileManager();
 
     //starts the menu
     public void display(){
@@ -57,6 +58,9 @@ public class UserInterface {
                 case 7:
                     getAllVehicles();
                     break;
+                case 8:
+                    addVehicleRequest();
+                    break;
 
 
 
@@ -83,6 +87,22 @@ public class UserInterface {
         ArrayList<Vehicle> allTheCars = dealership.getAllVehicle();
         this.displayVehicles(allTheCars);
     }
+
+
+    public void vinRemove(ArrayList<Vehicle>vehicles){
+        //Prompt the user for the VIN number
+        System.out.println("=== Search by VIN Number ===");
+        System.out.println();
+        System.out.println("What is the VIN number?");
+        int vinSearch = theScanner.nextInt();
+        System.out.println();
+         for(Vehicle vehicle : vehicles){
+             if(vinSearch == vehicle.getVin()){
+                 vehicles.remove(vinSearch);
+             }
+         }
+
+        }
 
     //This will display the vehicle
     private void displayVehicles(ArrayList<Vehicle> vehicles){
@@ -168,7 +188,114 @@ public class UserInterface {
     }
 
     private void getAllVehicles(){
-        System.out.println("=== All Vehicles ===");
+        System.out.println("=== All Vehicles in Inventory ===");
         displayVehicles(dealership.getAllVehicle());
     }
+
+    private void addVehicleRequest(){
+        //Eat the Line
+        theScanner.nextLine();
+        System.out.println("=== Adding a New Vehicle ===");
+        System.out.println();
+        System.out.println("What is the VIN of the Vehicle? ");
+        int addVin = theScanner.nextInt();
+        System.out.println("What is the Year of the Vehicle? ");
+        int addYear = theScanner.nextInt();
+
+        //Eat the line
+        theScanner.nextLine();
+
+        System.out.println("What is the Make of the Vehicle? ");
+        String addMake = theScanner.nextLine();
+        System.out.println("What is the Model of the Vehicle? ");
+        String addModel = theScanner.nextLine();
+        System.out.println("What is the Type of the Vehicle? ");
+        String addType = theScanner.nextLine();
+        System.out.println("What is the Color of the Vehicle? ");
+        String addColor = theScanner.nextLine();
+        System.out.println("What is the Mileage of the Vehicle? ");
+        int addMileage = theScanner.nextInt();
+        System.out.println("What is the Price of the Vehicle? ");
+        double addPrice = theScanner.nextDouble();
+        System.out.println();
+        //Eat the Line
+        theScanner.nextLine();
+        System.out.println("Is this correct? (Y/N)");
+        System.out.printf("""
+                VIN: %d
+                Year: %d
+                Make: %s
+                Model: %s
+                Type: %s
+                Color: %s
+                Mileage: %d
+                Price: $%.2f
+                
+                Press H: For Home Screen
+                """, addVin, addYear, addMake, addModel, addType, addColor, addMileage, addPrice);
+
+        String yesNo = theScanner.nextLine();
+
+        if(yesNo.equalsIgnoreCase("Y")){
+            Vehicle newVehicle = new Vehicle (addVin, addYear,addMake,addModel,addType,addColor,addMileage,addPrice);
+            dealership.addVehicle(newVehicle);
+            System.out.println();
+            fileManager.saveDealership(newVehicle);
+            System.out.println("Vehicle Saved!");
+            System.out.println();
+        }else if(yesNo.equalsIgnoreCase("H")){
+            display();
+
+        }else if(yesNo.equalsIgnoreCase("N")){
+            System.out.println("Try Again!");
+            System.out.println();
+            addVehicleRequest();
+        }
+    }
+
+    private void processGetByVinRequest(){
+        System.out.println("=== Search by VIN ===");
+        System.out.println();
+        System.out.println("What is the VIN number?");
+        System.out.println();
+        int vinVehicle = theScanner.nextInt();
+        displayVehicles(dealership.getVehicleByVin(vinVehicle));
+    }
+
+    private void removeVehicleRequest(){
+        //Make a menu that prompts questions to the user
+        //Store their answer to use.
+        boolean isRunning = false;
+        while(!isRunning) {
+            System.out.println("=== Remove Vehicle ===");
+            System.out.println();
+            System.out.println("1. To type in the VIn of vehicle to remove");
+            System.out.println("2. Go back Home");
+            int usersChoice = theScanner.nextInt();
+
+            switch(usersChoice){
+                case 1:
+
+                    break;
+                case 2:
+                    display();
+                    break;
+
+
+
+
+
+
+            }
+        }
+    }
+
+    private void removeVehicle(){
+        System.out.println("Please type in the VIN number");
+        int vinInput = theScanner.nextInt();
+        System.out.println();
+    }
+
+
+
 }

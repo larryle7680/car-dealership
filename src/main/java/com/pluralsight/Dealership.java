@@ -18,7 +18,19 @@ public class Dealership {
     }
 
     //method
-
+    //Returns an array list, trying to get the VIN number
+    public ArrayList<Vehicle>getVehicleByVin(int vin){
+        //Create a new ArrayList to store the results of the filter
+        ArrayList<Vehicle> vinResults = new ArrayList<>();
+        //For every Vehicle(Individual) that is inside inventory(the ArrayList inside Dealership)
+        //We are looping through that ArrayList to find vehicles that matches the filter.
+        for(Vehicle vehicle : inventory){
+            if(vehicle.getVin() == vin){
+                vinResults.add(vehicle);
+            }
+        }
+        return vinResults;
+    }
 
     //filter inventory list by price and return
     public ArrayList<Vehicle> getVehiclesByPrice(double minPrice, double maxPrice){
@@ -115,4 +127,32 @@ public class Dealership {
         this.inventory.add(vehicle);
     }
 
+    //Remove vehicle method
+    public void removeVehicle(Vehicle vehicle){
+        this.inventory.remove(vehicle);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

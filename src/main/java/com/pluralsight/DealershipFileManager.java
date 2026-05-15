@@ -1,10 +1,9 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class DealershipFileManager {
-
+    UserInterface ui;
     //variable for the path to the CSV file
     private final String FILE_PATH = "src/main/resources/inventory.csv";
 
@@ -18,6 +17,7 @@ public class DealershipFileManager {
 
             //create the BufferedReader for the csv
             BufferedReader inventoryReader = new BufferedReader(new FileReader(FILE_PATH));
+
 
             //grab the first line since it's the dealership info and we need that to create our dealership
             String dealershipInfo = inventoryReader.readLine();
@@ -63,7 +63,7 @@ public class DealershipFileManager {
 
         }catch (Exception potato){
             //oh darn! the crap we hoped would go well, didnt't so lets do this instead
-            System.out.println("Couldn't parse invetory file " + potato.getMessage());
+            System.out.println("Couldn't parse inventory file " + potato.getMessage());
         }
 
 
@@ -72,8 +72,19 @@ public class DealershipFileManager {
     }
 
     //stay empty for now but we will revisit later
-    public void saveDealership(){
+    public void saveDealership(Vehicle vehicle){
+       //Write dealership
+        try {
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter(FILE_PATH, true));
 
+            bufWriter.write(vehicle.getVin() + "|" + vehicle.getYear() + "|" + vehicle.getMake() + "|" +
+                    vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" +
+                    vehicle.getOdometer() + "|" + vehicle.getPrice());
+            bufWriter.close();
+        } catch (IOException e) {
+            System.out.println("File not found. ");
+            throw new RuntimeException(e);
+        }
     }
 
 }

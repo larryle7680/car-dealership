@@ -26,6 +26,14 @@ public class Vehicle {
         this.price = price;
     }
 
+    //Getters/Setters for vehicles
+
+
+    public int getVin() {
+        return vin;
+    }
+
+
     public String getVehicleType() {
         return vehicleType;
     }
