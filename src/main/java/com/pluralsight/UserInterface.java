@@ -30,6 +30,7 @@ public class UserInterface {
             System.out.println("7. List All Vehicles");
             System.out.println("8. Add Vehicle");
             System.out.println("9. Remove Vehicle");
+            System.out.println("10. Sell/Lease a Vehicle");
             System.out.println("99. Quit");
             System.out.println();
             System.out.println("Please Choose an option: ");
@@ -61,6 +62,11 @@ public class UserInterface {
                 case 8:
                     addVehicleRequest();
                     break;
+                case 9:
+                    removeVehicleRequest();
+                    break;
+
+
 
 
 
@@ -89,20 +95,7 @@ public class UserInterface {
     }
 
 
-    public void vinRemove(ArrayList<Vehicle>vehicles){
-        //Prompt the user for the VIN number
-        System.out.println("=== Search by VIN Number ===");
-        System.out.println();
-        System.out.println("What is the VIN number?");
-        int vinSearch = theScanner.nextInt();
-        System.out.println();
-         for(Vehicle vehicle : vehicles){
-             if(vinSearch == vehicle.getVin()){
-                 vehicles.remove(vinSearch);
-             }
-         }
 
-        }
 
     //This will display the vehicle
     private void displayVehicles(ArrayList<Vehicle> vehicles){
@@ -262,6 +255,10 @@ public class UserInterface {
         displayVehicles(dealership.getVehicleByVin(vinVehicle));
     }
 
+    private void processSellLeaseRequest(){
+
+    }
+
     private void removeVehicleRequest(){
         //Make a menu that prompts questions to the user
         //Store their answer to use.
@@ -275,7 +272,7 @@ public class UserInterface {
 
             switch(usersChoice){
                 case 1:
-
+                    removeVehicle();
                     break;
                 case 2:
                     display();
@@ -294,6 +291,19 @@ public class UserInterface {
         System.out.println("Please type in the VIN number");
         int vinInput = theScanner.nextInt();
         System.out.println();
+        System.out.println(vinInput);
+        for (Vehicle vehicle : dealership.getAllVehicle()){
+            if (vehicle.getVin() == vinInput){
+                dealership.removeVehicle(vehicle);
+                fileManager.saveDealership(dealership);
+                break;
+
+            }
+
+
+        }
+
+
     }
 
 

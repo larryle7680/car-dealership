@@ -87,4 +87,31 @@ public class DealershipFileManager {
         }
     }
 
+    public void saveDealership(Dealership dealership) {
+        try {
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter(FILE_PATH));
+
+            // Write the dealership header first
+            bufWriter.write(dealership.getName() + "|" +
+                    dealership.getAddress() + "|" +
+                    dealership.getPhone());
+            bufWriter.newLine();
+
+            // Write all remaining vehicles
+            for (Vehicle vehicle : dealership.getAllVehicle()) {
+                bufWriter.write(vehicle.getVin() + "|" +
+                        vehicle.getYear() + "|" +
+                        vehicle.getMake() + "|" +
+                        vehicle.getModel() + "|" +
+                        vehicle.getVehicleType() + "|" +
+                        vehicle.getColor() + "|" +
+                        vehicle.getOdometer() + "|" +
+                        vehicle.getPrice());
+                bufWriter.newLine();
+            }
+            bufWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
